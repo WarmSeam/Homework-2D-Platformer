@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader;
 

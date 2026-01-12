@@ -1,25 +1,25 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(EnemyAnimationChanger))]
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 3f;
 
     private Rigidbody2D _rigidbody;
-    private EndPathChecker _endPathChecker;
+    private WaypointNavigator _waypointNavigator;
+    private EnemyAnimationChanger _animationChanger;
 
-    private float _direction;
+    private Transform _target;
     private bool _isMoving = false;
-
-    public event Action<bool> Moved;
 
     private void Awake()
     {
-        _endPathChecker = GetComponentInChildren<EndPathChecker>();
+        _waypointNavigator = GetComponentInChildren<WaypointNavigator>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _direction = 1;
+        _animationChanger = GetComponent<EnemyAnimationChanger>();
+
+        _target = null;
     }
 
     private void FixedUpdate()
@@ -29,40 +29,36 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_endPathChecker != null)
-        _endPathChecker.EndReached += ChangeDirection;
+        if(_waypointNavigator != null)
+        _waypointNavigator.WaypointReached += ChangeTarget;
     }
 
     private void OnDisable()
     {
-        if (_endPathChecker != null)
-            _endPathChecker.EndReached -= ChangeDirection;
+        if (_waypointNavigator != null)
+            _waypointNavigator.WaypointReached -= ChangeTarget;
     }
 
     public void Move()
     {
-        _rigidbody.velocity = new Vector2(_direction * _moveSpeed, _rigidbody.velocity.y);
+        Vector2 direction = (_target.position - transform.position).normalized;
+        _rigidbody.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody.velocity.y);
 
         bool isMoving = true;
         GetMoveInfo(isMoving);
     }
 
-    private void ChangeDirection()
+    private void ChangeTarget(Transform target)
     {
-        _direction = -_direction;
-
-        if (_direction < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
-        else if (_direction > 0)
-            transform.localScale = new Vector3(1, 1, 1);
+        _target = target;
     }
 
-    private void GetMoveInfo(bool isMovingNow)
+    private void GetMoveInfo(bool isMoving)
     {
-        if (_isMoving != isMovingNow)
+        if (_isMoving != isMoving)
         {
-            _isMoving = isMovingNow;
-            Moved?.Invoke(_isMoving);
+            _isMoving = isMoving;
+            _animationChanger.ChangeMoveState(isMoving);
         }
     }
 }
