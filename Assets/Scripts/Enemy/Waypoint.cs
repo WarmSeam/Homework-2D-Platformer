@@ -26,6 +26,7 @@ public class Waypoint : MonoBehaviour
     {
         transform.position = _globalPosition;
     }
+
     private void AdjustPosition()
     {
         if (_enemyParent != null)

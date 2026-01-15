@@ -11,11 +11,11 @@ public class GroundChecker : MonoBehaviour
     public event Action<bool> GroundStateChanged;
 
     private bool _lastGroundState;
-    private WaitForSeconds _delay;
+    private WaitForSeconds _wait;
 
     private void Awake()
     {
-        _delay = new WaitForSeconds(_checkDelayInSeconds);
+        _wait = new WaitForSeconds(_checkDelayInSeconds);
     }
 
     private void Start()
@@ -26,9 +26,9 @@ public class GroundChecker : MonoBehaviour
 
     private IEnumerator UpdateGroundState()
     {
-        while (gameObject.activeSelf)
+        while (gameObject != null)
         {
-            yield return _delay;
+            yield return _wait;
 
             bool isGrounded = Physics2D.Raycast(transform.position, Vector2.down, _distance, _groundLayer);
 

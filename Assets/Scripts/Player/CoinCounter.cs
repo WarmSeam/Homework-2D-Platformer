@@ -13,12 +13,14 @@ public class CoinCounter : MonoBehaviour
 
     private void OnEnable()
     {
+        if(_coinCollector != null) 
         _coinCollector.CoinCollected += IncreaseCount;
     }
 
     private void OnDisable()
     {
-        _coinCollector.CoinCollected -= IncreaseCount;
+        if (_coinCollector != null)
+            _coinCollector.CoinCollected -= IncreaseCount;
     }
 
     private void IncreaseCount()

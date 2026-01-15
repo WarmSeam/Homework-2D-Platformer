@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimationChanger))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,10 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private GroundChecker _groundChecker;
-
-    public event Action<bool> Moved;
-    public event Action Jumped;
-    public event Action<bool> Running;
+    private PlayerAnimationChanger _animationChanger;
 
     private bool _onGround;
     private bool _isRunning;
@@ -23,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _groundChecker = GetComponentInChildren<GroundChecker>();
+        _animationChanger = GetComponent<PlayerAnimationChanger>();
+
+        _isRunning = false;
+        _onGround = true;
     }
 
     private void OnEnable()
@@ -53,12 +53,7 @@ public class PlayerMovement : MonoBehaviour
         else
             isMove = false;
 
-        if (direction < 0)
-            transform.localScale = new Vector3(-1, 1, 1);
-        else if (direction > 0)
-            transform.localScale = new Vector3(1, 1, 1);
-
-        Moved?.Invoke(isMove);
+        _animationChanger.ChangeWalkState(isMove);
     }
 
     public void Run(bool isRunning)
@@ -66,17 +61,14 @@ public class PlayerMovement : MonoBehaviour
         if (_onGround)
         {
             _isRunning = isRunning;
-            Running?.Invoke(_isRunning);
+            _animationChanger.ChangeRunState(_isRunning);
         }
     }
 
     public void Jump(bool isJumped)
     {
         if (isJumped && _onGround)
-        {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            Jumped?.Invoke();
-        }
     }
 
     private void GetGroundState(bool onGround)
