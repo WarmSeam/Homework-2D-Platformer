@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement), typeof(BoxCollider2D), typeof(EnemyRotator))]
+[RequireComponent(typeof(EnemyMover), typeof(BoxCollider2D), typeof(EnemyRotator))]
 
 public class Enemy : MonoBehaviour
 {

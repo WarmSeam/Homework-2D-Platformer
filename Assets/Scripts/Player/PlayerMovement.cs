@@ -8,8 +8,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _runSpeed = 5f;
     [SerializeField] private float _jumpForce = 7f;
 
+    [SerializeField] private GroundChecker _groundChecker;
+
     private Rigidbody2D _rigidbody;
-    private GroundChecker _groundChecker;
     private PlayerAnimationChanger _animationChanger;
 
     private bool _onGround;
@@ -18,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _groundChecker = GetComponentInChildren<GroundChecker>();
         _animationChanger = GetComponent<PlayerAnimationChanger>();
 
         _isRunning = false;

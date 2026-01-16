@@ -28,5 +28,4 @@ public class CoinCounter : MonoBehaviour
         _count += 1;
         Debug.Log("Coins: " + _count);
     }
-
 }

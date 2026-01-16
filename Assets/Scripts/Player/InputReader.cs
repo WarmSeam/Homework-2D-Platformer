@@ -1,15 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    
     private const string Horizontal = "Horizontal";
     private const string Jump = "Jump";
     private const string Run = "Fire3";
-
 
     public event Action<float> InputChanged;
     public event Action<bool> JumpRequested;
@@ -25,5 +21,4 @@ public class InputReader : MonoBehaviour
         JumpRequested?.Invoke(isJumped);
         RunPressed?.Invoke(isRunning);
     }
-
 }

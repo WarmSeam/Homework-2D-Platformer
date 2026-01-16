@@ -4,43 +4,57 @@ using UnityEngine;
 
 public class PlayerAnimationChanger : MonoBehaviour
 {
-    private const string IsWalking = "isWalking";
-    private const string OnGround = "OnGround";
-    private const string IsRun = "isRun";
+    [SerializeField] private GroundChecker _groundChecker;
 
     private Animator _animator;
-    private GroundChecker _groundChecker;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _groundChecker = GetComponentInChildren<GroundChecker>();
     }
 
     private void OnEnable()
     {
         if (_groundChecker != null)
-            _groundChecker.GroundStateChanged += GetGroundState;
+            _groundChecker.GroundStateChanged += OnGroundStateChanged;
     }
 
     private void OnDisable()
     {
         if (_groundChecker != null)
-            _groundChecker.GroundStateChanged -= GetGroundState;
+            _groundChecker.GroundStateChanged -= OnGroundStateChanged;
     }
 
-    public void ChangeWalkState(bool isWalk)
+    public void ChangeWalkState(bool isMoving)
     {
-        _animator.SetBool(IsWalking, isWalk);
+        Set(PlayerAnimatorData.Params.IsWalking, isMoving);
     }
 
-    public void ChangeRunState(bool isRun)
+    public void ChangeRunState(bool isRunning)
     {
-        _animator.SetBool(IsRun, isRun);
+        Set(PlayerAnimatorData.Params.IsRunning, isRunning);
     }
 
-    private void GetGroundState(bool onGround)
+    private void OnGroundStateChanged(bool onGround)
     {
-        _animator.SetBool(OnGround, onGround);
+       Set(PlayerAnimatorData.Params.OnGround, onGround);
+    }
+
+    private void Set(int parameter, bool isEnabled)
+    {
+        if (isEnabled)
+            Enable(parameter);
+        else
+            Disable(parameter);
+    }
+
+    private void Enable(int parameter)
+    {
+        _animator.SetBool(parameter, true);
+    }
+
+    private void Disable(int parameter)
+    {
+        _animator.SetBool(parameter, false);
     }
 }

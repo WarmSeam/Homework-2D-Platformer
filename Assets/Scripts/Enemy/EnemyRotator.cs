@@ -3,10 +3,15 @@ using UnityEngine;
 public class EnemyRotator : MonoBehaviour
 {
     private WaypointNavigator _waypointNavigator;
+    private Quaternion _faceLeft;
+    private Quaternion _faceRight;
 
     private void Awake()
     {
         _waypointNavigator = GetComponentInChildren<WaypointNavigator>();
+
+        _faceRight = Quaternion.Euler(0, 0, 0);
+        _faceLeft = Quaternion.Euler(0, 180, 0);
     }
 
     private void OnEnable()
@@ -21,13 +26,9 @@ public class EnemyRotator : MonoBehaviour
 
     private void Rotate(Transform target)
     {
-        Vector3 rotation = transform.eulerAngles;
-
         if (target.position.x <= transform.position.x)
-            rotation.y = -180;
+            transform.rotation = _faceLeft;
         else
-            rotation.y = 0;
-
-        transform.eulerAngles = rotation;
+            transform.rotation = _faceRight;
     }
 }

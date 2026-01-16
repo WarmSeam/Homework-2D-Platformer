@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAnimationChanger : MonoBehaviour
 {
-    private const string IsWalking = "isWalking";
+    public readonly int IsWalking = Animator.StringToHash(nameof(IsWalking));
 
     private Animator _animator;
 

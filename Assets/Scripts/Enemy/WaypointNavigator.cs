@@ -44,6 +44,6 @@ public class WaypointNavigator : MonoBehaviour
 
     private void SwitchPoint()
     {
-        _currentIndex = (_currentIndex + 1) % _waypointsCount;
+        _currentIndex = ++_currentIndex % _waypointsCount;
     }
 }
