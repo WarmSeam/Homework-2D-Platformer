@@ -4,25 +4,11 @@ using UnityEngine;
 
 public class PlayerAnimationChanger : MonoBehaviour
 {
-    [SerializeField] private GroundChecker _groundChecker;
-
     private Animator _animator;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-    }
-
-    private void OnEnable()
-    {
-        if (_groundChecker != null)
-            _groundChecker.GroundStateChanged += OnGroundStateChanged;
-    }
-
-    private void OnDisable()
-    {
-        if (_groundChecker != null)
-            _groundChecker.GroundStateChanged -= OnGroundStateChanged;
     }
 
     public void ChangeWalkState(bool isMoving)
@@ -35,7 +21,7 @@ public class PlayerAnimationChanger : MonoBehaviour
         Set(PlayerAnimatorData.Params.IsRunning, isRunning);
     }
 
-    private void OnGroundStateChanged(bool onGround)
+    public void OnGroundStateChanged(bool onGround)
     {
        Set(PlayerAnimatorData.Params.OnGround, onGround);
     }

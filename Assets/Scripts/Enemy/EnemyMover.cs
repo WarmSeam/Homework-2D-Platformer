@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 3f;
-    [SerializeField] private WaypointNavigator _waypointNavigator;
 
     private Rigidbody2D _rigidbody;
     private EnemyAnimationChanger _animationChanger;
 
-    private Transform _target;
+    private Vector3 _target;
     private bool _isMoving = true;
 
     private void Awake()
@@ -18,7 +17,7 @@ public class EnemyMover : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animationChanger = GetComponent<EnemyAnimationChanger>();
 
-        _target = null;
+        _target = transform.position;
     }
 
     private void Start()
@@ -26,30 +25,18 @@ public class EnemyMover : MonoBehaviour
         _animationChanger.ChangeMoveState(_isMoving);
     }
 
-    private void OnEnable()
-    {
-        if(_waypointNavigator != null)
-        _waypointNavigator.WaypointReached += ChangeTarget;
-    }
-
-    private void OnDisable()
-    {
-        if (_waypointNavigator != null)
-            _waypointNavigator.WaypointReached -= ChangeTarget;
-    }
-
     private void FixedUpdate()
     {
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
-        Vector2 direction = (_target.position - transform.position).normalized;
+        Vector2 direction = (_target - transform.position).normalized;
         _rigidbody.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody.velocity.y);
     }
 
-    private void ChangeTarget(Transform target)
+    public void TakeTarget(Vector3 target)
     {
         _target = target;
     }

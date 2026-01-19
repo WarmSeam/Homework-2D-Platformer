@@ -28,13 +28,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         if(_groundChecker != null)
-        _groundChecker.GroundStateChanged += GetGroundState;
+        _groundChecker.GroundStateChanged += UpdateGroundState;
     }
 
     private void OnDisable()
     {
         if (_groundChecker != null)
-            _groundChecker.GroundStateChanged -= GetGroundState;
+            _groundChecker.GroundStateChanged -= UpdateGroundState;
     }
 
     public void Move(float direction)
@@ -71,8 +71,9 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
-    private void GetGroundState(bool onGround)
+    private void UpdateGroundState(bool onGround)
     {
         _onGround = onGround;
+        _animationChanger.OnGroundStateChanged(onGround);
     }
 }
