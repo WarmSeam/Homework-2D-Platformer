@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class WaypointNavigator : MonoBehaviour
+public class DestinationSelector : MonoBehaviour
 {
     [SerializeField] private Waypoint[] _waypoints;
     [SerializeField] private float _reachDistance = 0.3f;

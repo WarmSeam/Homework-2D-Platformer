@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStateRegulator : MonoBehaviour
 {
-    [SerializeField] private WaypointNavigator _waypointNavigator;
+    [SerializeField] private DestinationSelector _destinationSelector;
 
     private EnemyMover _mover;
     private Rotator _rotator;
@@ -17,19 +17,19 @@ public class EnemyStateRegulator : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_waypointNavigator != null)
+        if (_destinationSelector != null)
         {
-            _waypointNavigator.WaypointReached += _mover.TakeTarget;
-            _waypointNavigator.WaypointReached += _rotator.Rotate;
+            _destinationSelector.WaypointReached += _mover.TakeTarget;
+            _destinationSelector.WaypointReached += _rotator.Rotate;
         }
     }
 
     private void OnDisable()
     {
-        if (_waypointNavigator != null)
+        if (_destinationSelector != null)
         {
-            _waypointNavigator.WaypointReached -= _mover.TakeTarget;
-            _waypointNavigator.WaypointReached -= _rotator.Rotate;
+            _destinationSelector.WaypointReached -= _mover.TakeTarget;
+            _destinationSelector.WaypointReached -= _rotator.Rotate;
         }
     }
 }

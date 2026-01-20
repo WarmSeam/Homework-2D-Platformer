@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd9914cb5678884585c531aee206748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypointNavigator: {fileID: 8547678933166948503}
+  _destinationSelector: {fileID: 8547678933166948503}
 --- !u!61 &8907789665081308721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6655324779252577188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efdd5727e41d90543a234289a8b3c32d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b30ebd95983ce647aab9c1ea57d5f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _waypoints:

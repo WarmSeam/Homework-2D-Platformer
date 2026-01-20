@@ -23,7 +23,7 @@ public class CoinCounter : MonoBehaviour
             _coinCollector.CoinCollected -= IncreaseCount;
     }
 
-    private void IncreaseCount()
+    private void IncreaseCount(Coin coin)
     {
         _count += 1;
         Debug.Log("Coins: " + _count);

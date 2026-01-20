@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public void Collect()
+    public SpawnPoint CurrentSpawnPoint {  get; private set; }
+
+    public void SetSpawnPoint(SpawnPoint point)
     {
-        Destroy(gameObject);
+        CurrentSpawnPoint = point;
     }
 }
