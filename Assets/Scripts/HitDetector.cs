@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class HitDetector : MonoBehaviour
 {
-    public event Action HitReceived;
+    public event Action<int> DamageTaken;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void TakeDamage(int damage)
     {
-        
+        DamageTaken?.Invoke(damage);
     }
 }

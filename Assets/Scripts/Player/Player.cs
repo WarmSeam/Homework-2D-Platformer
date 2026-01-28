@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
 
     private PlayerMovement _movement;
     private Rotator _rotator;
+    private AttackActivator _attacker;
 
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
         _rotator = GetComponent<Rotator>();
+        _attacker = GetComponent<AttackActivator>();
     }
 
     private void OnEnable()
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
         _inputReader.InputChanged += _movement.Move;
         _inputReader.RunPressed += _movement.Run;
         _inputReader.JumpRequested += _movement.Jump;
+        _inputReader.HitPressed += _attacker.BeginAttack;
     }
 
     private void OnDisable()
