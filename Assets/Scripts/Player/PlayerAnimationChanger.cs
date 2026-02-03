@@ -26,6 +26,21 @@ public class PlayerAnimationChanger : MonoBehaviour
        Set(PlayerAnimatorData.Params.OnGround, onGround);
     }
 
+    public void ChangeDeathState(bool isDied)
+    {
+        Set(PlayerAnimatorData.Params.isDied, isDied);
+    }
+
+    public void ActivateHurtTrigger()
+    {
+        _animator.SetTrigger(PlayerAnimatorData.Params.Hurt);
+    }
+
+    public void ActivateAttackTrigger()
+    {
+        _animator.SetTrigger(PlayerAnimatorData.Params.Attack);
+    }
+
     private void Set(int parameter, bool isEnabled)
     {
         if (isEnabled)

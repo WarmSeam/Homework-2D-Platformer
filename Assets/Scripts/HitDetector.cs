@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HitDetector : MonoBehaviour
 {
-    public event Action<int> DamageTaken;
+    public event Action<int> HitTaken;
 
-    public void TakeDamage(int damage)
+    public void HandleHitTaking(int damage)
     {
-        DamageTaken?.Invoke(damage);
+        HitTaken?.Invoke(damage);
     }
 }

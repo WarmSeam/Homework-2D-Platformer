@@ -6,9 +6,9 @@ using UnityEngine.Pool;
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;
-    [SerializeField] private SpawnPoint[] _points;
+    [SerializeField] private CoinSpawnPoint[] _points;
     [SerializeField] private float _spawnDelay = 5;
-    [SerializeField] private CoinCollector _collector;
+    [SerializeField] private ItemCollector _collector;
 
     private IObjectPool<Coin> _pool;
     private WaitForSeconds _waitInterval;
@@ -67,11 +67,11 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoin()
     {
-        SpawnPoint[] freePoints = _points.Where(point => point.IsOccupied == false).ToArray();
+        CoinSpawnPoint[] freePoints = _points.Where(point => point.IsOccupied == false).ToArray();
 
         if (freePoints.Length > 0 && _activeCount < _countOneTime)
         {
-            SpawnPoint point = freePoints[UnityEngine.Random.Range(0, freePoints.Length)];
+            CoinSpawnPoint point = freePoints[UnityEngine.Random.Range(0, freePoints.Length)];
 
             Coin coin = _pool.Get();
 

@@ -1,41 +1,46 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerAnimationChanger))]
 
 public class AttackActivator : MonoBehaviour
 {
-    public readonly int AttackTrigger = Animator.StringToHash(nameof(AttackTrigger));
-
     [SerializeField] private DamageCarrier _damageCarrier;
     [SerializeField] private float _duration = 1f;
 
-    private Animator _animator;
+    private PlayerAnimationChanger _animationChanger;
     private WaitForSeconds _wait;
+    private IEnumerator _attackCoroutine;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animationChanger = GetComponent<PlayerAnimationChanger>();
 
+        _attackCoroutine = null;
         _wait = new WaitForSeconds(_duration);
 
         _damageCarrier.gameObject.SetActive(false);
     }
 
-    public void BeginAttack(bool isHitted)
+    public void BeginAttack(bool isAttackLaunched)
     {
-        if (isHitted)
-            StartCoroutine(Attack());
+        if (_attackCoroutine == null && isAttackLaunched)
+        {
+            _attackCoroutine = Attack();
+            StartCoroutine(_attackCoroutine);
+        }
     }
 
     private IEnumerator Attack()
     {
-        _animator.SetTrigger(AttackTrigger);
+        _animationChanger.ActivateAttackTrigger();
+
         _damageCarrier.gameObject.SetActive(true);
 
         yield return _wait;
 
         _damageCarrier.gameObject.SetActive(false);
-    }
 
+        _attackCoroutine = null;
+    }
 }

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+public abstract class SpawnPoint : MonoBehaviour
 {
+    [SerializeField] private Color _color = Color.red;
+
     public bool IsOccupied {  get; private set; }
 
     public void SetOccupied(bool value)
@@ -13,7 +15,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = _color;
         Gizmos.DrawSphere(transform.position, 0.1f);
     }
 }
