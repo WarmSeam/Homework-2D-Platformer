@@ -1,8 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-
-public class PlayerAnimationChanger : MonoBehaviour
+public class AnimationChanger : MonoBehaviour
 {
     private Animator _animator;
 
@@ -13,32 +12,32 @@ public class PlayerAnimationChanger : MonoBehaviour
 
     public void ChangeWalkState(bool isMoving)
     {
-        Set(PlayerAnimatorData.Params.IsWalking, isMoving);
+        Set(AnimatorData.Params.IsWalking, isMoving);
     }
 
     public void ChangeRunState(bool isRunning)
     {
-        Set(PlayerAnimatorData.Params.IsRunning, isRunning);
+        Set(AnimatorData.Params.IsRunning, isRunning);
     }
 
     public void OnGroundStateChanged(bool onGround)
     {
-       Set(PlayerAnimatorData.Params.OnGround, onGround);
+       Set(AnimatorData.Params.OnGround, onGround);
     }
 
     public void ChangeDeathState(bool isDied)
     {
-        Set(PlayerAnimatorData.Params.isDied, isDied);
+        Set(AnimatorData.Params.isDied, isDied);
     }
 
     public void ActivateHurtTrigger()
     {
-        _animator.SetTrigger(PlayerAnimatorData.Params.Hurt);
+        _animator.SetTrigger(AnimatorData.Params.Hurt);
     }
 
     public void ActivateAttackTrigger()
     {
-        _animator.SetTrigger(PlayerAnimatorData.Params.Attack);
+        _animator.SetTrigger(AnimatorData.Params.Attack);
     }
 
     private void Set(int parameter, bool isEnabled)

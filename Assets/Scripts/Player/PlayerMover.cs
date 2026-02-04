@@ -1,8 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAnimationChanger))]
-
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(AnimationChanger))]
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 3f;
     [SerializeField] private float _runSpeed = 5f;
@@ -11,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GroundChecker _groundChecker;
 
     private Rigidbody2D _rigidbody;
-    private PlayerAnimationChanger _animationChanger;
+    private AnimationChanger _animationChanger;
 
     private bool _onGround;
     private bool _isRunning;
@@ -19,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animationChanger = GetComponent<PlayerAnimationChanger>();
+        _animationChanger = GetComponent<AnimationChanger>();
 
         _isRunning = false;
         _onGround = true;
@@ -48,10 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
         _rigidbody.velocity = new Vector2(direction * currentSpeed, _rigidbody.velocity.y);
 
-        if (direction != 0f)
-            isMove = true;
-        else
-            isMove = false;
+        isMove = direction != 0f;
 
         _animationChanger.ChangeWalkState(isMove);
     }

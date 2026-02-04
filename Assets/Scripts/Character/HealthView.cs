@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthView : MonoBehaviour
 {
-    [SerializeField] private HealthHandler _health;
+    [SerializeField] private Health _health;
 
     private void OnEnable()
     {

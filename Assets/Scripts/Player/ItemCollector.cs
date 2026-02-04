@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
-    public event Action<Coin> CoinCollected;
-    public event Action<Heal> HealPickedUp;
+    public event Action CoinCollected;
+    public event Action<Heal> HealCollected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Coin coin))
-            CoinCollected?.Invoke(coin);
+        {
+            coin.Collect();
+            CoinCollected?.Invoke();
+        }
 
-        if(collision.TryGetComponent(out Heal heal))
-            HealPickedUp?.Invoke(heal);
+        if (collision.TryGetComponent(out Heal heal))
+        {
+            heal.PickedUp();
+            HealCollected?.Invoke(heal);
+        }
     }
 }

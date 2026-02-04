@@ -1,24 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement), typeof(Rotator), typeof(AttackActivator))]
-
+[RequireComponent(typeof(PlayerMover), typeof(Health), typeof(Attacker))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader;
 
-    private PlayerMovement _movement;
+    private PlayerMover _movement;
     private Rotator _rotator;
-    private AttackActivator _attacker;
-    private HealthHandler _healthHandler;
+    private Attacker _attacker;
+    private Health _health;
 
     private void Awake()
     {
-        _movement = GetComponent<PlayerMovement>();
+        _movement = GetComponent<PlayerMover>();
         _rotator = GetComponent<Rotator>();
-        _attacker = GetComponent<AttackActivator>();
-        _healthHandler = GetComponent<HealthHandler>();
+        _attacker = GetComponent<Attacker>();
+        _health = GetComponent<Health>();
     }
 
     private void OnEnable()
@@ -29,7 +26,7 @@ public class Player : MonoBehaviour
         _inputReader.JumpRequested += _movement.Jump;
         _inputReader.AttackPressed += _attacker.BeginAttack;
 
-        _healthHandler.HealthOver += Die;
+        _health.HealthOver += Die;
     }
 
     private void OnDisable()
@@ -39,7 +36,7 @@ public class Player : MonoBehaviour
         _inputReader.RunPressed -= _movement.Run;
         _inputReader.JumpRequested -= _movement.Jump;
 
-        _healthHandler.HealthOver -= Die;
+        _health.HealthOver -= Die;
     }
 
     private void SetRotation(float direction)

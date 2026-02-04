@@ -1,20 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(HealthHandler), typeof(Rotator))]
+[RequireComponent(typeof(EnemyMover), typeof(Health), typeof(Rotator))]
 
-public class EnemyStateRegulator : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private DestinationSelector _destinationSelector;
 
     private EnemyMover _mover;
     private Rotator _rotator;
-    private HealthHandler _healthHandler;
+    private Health _health;
 
     private void Awake()
     {
         _mover = GetComponent<EnemyMover>();
         _rotator = GetComponent<Rotator>();
-        _healthHandler = GetComponent<HealthHandler>();
+        _health = GetComponent<Health>();
     }
 
     private void OnEnable()
@@ -25,7 +25,7 @@ public class EnemyStateRegulator : MonoBehaviour
             _destinationSelector.WaypointChanged += _rotator.Rotate;
         }
 
-        _healthHandler.HealthOver += Die;
+        _health.HealthOver += Die;
     }
 
     private void OnDisable()
@@ -36,7 +36,7 @@ public class EnemyStateRegulator : MonoBehaviour
             _destinationSelector.WaypointChanged -= _rotator.Rotate;
         }
 
-        _healthHandler.HealthOver -= Die;
+        _health.HealthOver -= Die;
     }
 
     private void Die(bool isDied)

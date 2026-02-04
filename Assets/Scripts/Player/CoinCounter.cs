@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CoinCounter : MonoBehaviour
 {
-    [SerializeField] private ItemCollector _collector;
+    [SerializeField] private ItemCollector _itemCollector;
 
     private int _count;
 
@@ -13,17 +13,17 @@ public class CoinCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_collector != null) 
-        _collector.CoinCollected += IncreaseCount;
+        if(_itemCollector != null) 
+        _itemCollector.CoinCollected += OnCoinCollected;
     }
 
     private void OnDisable()
     {
-        if (_collector != null)
-            _collector.CoinCollected -= IncreaseCount;
+        if (_itemCollector != null)
+            _itemCollector.CoinCollected -= OnCoinCollected;
     }
 
-    private void IncreaseCount(Coin coin)
+    private void OnCoinCollected()
     {
         _count += 1;
         Debug.Log("Coins: " + _count);

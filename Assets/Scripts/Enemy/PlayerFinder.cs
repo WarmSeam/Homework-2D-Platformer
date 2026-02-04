@@ -1,34 +1,53 @@
 using System;
+using System.Collections;
 using UnityEngine;
-
-[RequireComponent(typeof(BoxCollider2D))]
 
 public class PlayerFinder : MonoBehaviour
 {
-    private BoxCollider2D _collider;
+    [SerializeField] private Vector2 _boxSize = new(5f, 2f);
+    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private float _checkInterval = 0.3f;
 
     public event Action<Vector3> PlayerFound;
     public event Action PlayerLost;
 
+    private WaitForSeconds _wait;
+    private bool _isSearchActive;
+
     private void Awake()
     {
-        _collider = GetComponent<BoxCollider2D>();
-        _collider.isTrigger = true;
+        _wait = new WaitForSeconds(_checkInterval);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.TryGetComponent(out Player player))
-        {
-            Vector3 playerPosition = player.transform.position;
+        _isSearchActive = true;
+        StartCoroutine(CheckPlayer());
+    }
 
-            PlayerFound?.Invoke(playerPosition);
+    private void OnDisable()
+    {
+        _isSearchActive = false;
+    }
+
+    private IEnumerator CheckPlayer()
+    {
+        while (_isSearchActive)
+        {
+            yield return _wait;
+
+            Collider2D hit = Physics2D.OverlapBox(transform.position, _boxSize, 0f, _layerMask);
+
+            if (hit != null && hit.TryGetComponent(out Player player))
+                PlayerFound?.Invoke(player.transform.position);
+            else
+                PlayerLost?.Invoke();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnDrawGizmosSelected()
     {
-        if (collision.TryGetComponent(out Player player))
-        PlayerLost?.Invoke();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, _boxSize);
     }
 }
