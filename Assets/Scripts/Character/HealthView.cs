@@ -6,14 +6,14 @@ public class HealthView : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.HealthDecreased += DisplayHealthValue;
-        _health.HealthIncreased += DisplayHealthValue;
+        _health.Decreased += DisplayHealthValue;
+        _health.Increased += DisplayHealthValue;
     }
 
     private void OnDisable()
     {
-        _health.HealthDecreased -= DisplayHealthValue;
-        _health.HealthIncreased -= DisplayHealthValue;
+        _health.Decreased -= DisplayHealthValue;
+        _health.Increased -= DisplayHealthValue;
     }
     private void DisplayHealthValue(int value)
     {

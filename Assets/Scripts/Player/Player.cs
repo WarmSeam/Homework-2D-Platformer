@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         _inputReader.JumpRequested += _movement.Jump;
         _inputReader.AttackPressed += _attacker.BeginAttack;
 
-        _health.HealthOver += Die;
+        _health.Over += Die;
     }
 
     private void OnDisable()
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         _inputReader.RunPressed -= _movement.Run;
         _inputReader.JumpRequested -= _movement.Jump;
 
-        _health.HealthOver -= Die;
+        _health.Over -= Die;
     }
 
     private void SetRotation(float direction)

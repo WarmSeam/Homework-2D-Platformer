@@ -3,48 +3,48 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _max = 100;
 
-    public event Action<int> HealthDecreased;
-    public event Action<int> HealthIncreased;
-    public event Action<bool> HealthOver;
+    public event Action<int> Decreased;
+    public event Action<int> Increased;
+    public event Action<bool> Over;
 
-    private int _currentHealth;
-    private bool _isDied;
+    private int _current;
+    private bool _isOver;
 
     private void Awake()
     {
-        _isDied = false;
-        _currentHealth = _maxHealth;
+        _isOver = false;
+        _current = _max;
     }
 
     public void Decrease(int value)
     {
-        if (_isDied)
+        if (_isOver)
             return;
 
         if (value < 0)
             value = 0;
 
-        _currentHealth = Mathf.Clamp(_currentHealth - value, 0, _maxHealth);
-        HealthDecreased?.Invoke(_currentHealth);
+        _current = Mathf.Clamp(_current - value, 0, _max);
+        Decreased?.Invoke(_current);
 
-        if (_currentHealth == 0)
+        if (_current == 0)
         {
-            _isDied = true;
-            HealthOver?.Invoke(_isDied);
+            _isOver = true;
+            Over?.Invoke(_isOver);
         }
     }
 
     public void Increase(int value)
     {
-        if (_isDied)
+        if (_isOver)
             return;
 
         if (value < 0)
             value = 0;
 
-        _currentHealth = Mathf.Clamp(_currentHealth + value, 0, _maxHealth);
-        HealthIncreased?.Invoke(_currentHealth);
+        _current = Mathf.Clamp(_current + value, 0, _max);
+        Increased?.Invoke(_current);
     }
 }

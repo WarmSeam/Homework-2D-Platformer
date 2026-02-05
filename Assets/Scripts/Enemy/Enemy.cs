@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
             _destinationSelector.WaypointChanged += _rotator.Rotate;
         }
 
-        _health.HealthOver += Die;
+        _health.Over += Die;
     }
 
     private void OnDisable()
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
             _destinationSelector.WaypointChanged -= _rotator.Rotate;
         }
 
-        _health.HealthOver -= Die;
+        _health.Over -= Die;
     }
 
     private void Die(bool isDied)

@@ -14,14 +14,14 @@ public class HealthChangingReactor : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.HealthDecreased += OnHealthDecreased;
-        _health.HealthOver += OnHealthOver;
+        _health.Decreased += OnHealthDecreased;
+        _health.Over += OnHealthOver;
     }
 
     private void OnDisable()
     {
-        _health.HealthDecreased -= OnHealthDecreased;
-        _health.HealthOver -= OnHealthOver;
+        _health.Decreased -= OnHealthDecreased;
+        _health.Over -= OnHealthOver;
     }
 
     private void OnHealthDecreased(int healthValue)
