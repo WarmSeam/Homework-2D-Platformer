@@ -1,42 +1,46 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Health), typeof(HitDetector), typeof(HealthChangingReactor))]
+[RequireComponent(typeof(Health), typeof(DamageTaker), typeof(HealthAdder))]
 public class HealthHandler : MonoBehaviour
 {
     [SerializeField] private ItemCollector _itemCollector;
 
     private Health _health;
-    private HitDetector _hitDetector;
+    private DamageTaker _damageTaker;
+    private HealthAdder _healthAdder;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _hitDetector = GetComponent<HitDetector>();
+        _damageTaker = GetComponent<DamageTaker>();
+        _healthAdder = GetComponent<HealthAdder>();
     }
     private void OnEnable()
     {
-        _hitDetector.HitTaken += OnHitTaken;
+        _damageTaker.DamageTaken += DecreaseHealth;
+        _healthAdder.HealthAdded += IncreaseHealth;
 
         if (_itemCollector != null)
-            _itemCollector.HealCollected += OnHealPickedUp;
+            _itemCollector.HealCollected += IncreaseHealth;
     }
 
     private void OnDisable()
     {
-        _hitDetector.HitTaken -= OnHitTaken;
+        _damageTaker.DamageTaken -= DecreaseHealth;
+        _healthAdder.HealthAdded -= IncreaseHealth;
 
         if (_itemCollector != null)
-            _itemCollector.HealCollected -= OnHealPickedUp;
+            _itemCollector.HealCollected -= IncreaseHealth;
     }
 
-    private void OnHitTaken(int damage)
+    private void DecreaseHealth(int damage)
     {
         _health.Decrease(damage);
     }
 
-    private void OnHealPickedUp(Heal heal)
+    private void IncreaseHealth(int value)
     {
-        _health.Increase(heal.Value);
+        _health.Increase(value);
     }
 }
 
