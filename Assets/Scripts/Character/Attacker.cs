@@ -57,7 +57,7 @@ public class Attacker : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, _punchZone.Radius, _layerMask);
 
-        if (hit != null && hit.TryGetComponent(out HitDetector opponent))
-            opponent.HandleHitTaking(_damageAmount);
+        if (hit != null && hit.TryGetComponent(out DamageTaker opponent))
+            opponent.HandleTakingDamage(_damageAmount);
     }
 }
