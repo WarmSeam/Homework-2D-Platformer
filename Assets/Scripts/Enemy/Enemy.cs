@@ -52,6 +52,10 @@ public class Enemy : MonoBehaviour
 
             if (TryGetComponent(out Collider2D collider))
                 collider.enabled = false;
+
+            Canvas canvas = GetComponentInChildren<Canvas>();
+            if (canvas != null)
+                canvas.enabled = false;
         }
     }
 }

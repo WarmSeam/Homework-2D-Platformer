@@ -9,13 +9,23 @@ public class Health : MonoBehaviour
     public event Action<int> Increased;
     public event Action<bool> Over;
 
+    private int _min = 0;
     private int _current;
     private bool _isOver;
+
+    public int Current => _current;
+    public int Max => _max;
+    public int Min => _min;
 
     private void Awake()
     {
         _isOver = false;
         _current = _max;
+    }
+
+    private void Start()
+    {
+        Increased?.Invoke(_current);
     }
 
     public void Decrease(int value)
@@ -26,10 +36,10 @@ public class Health : MonoBehaviour
         if (value < 0)
             value = 0;
 
-        _current = Mathf.Clamp(_current - value, 0, _max);
+        _current = Mathf.Clamp(_current - value, _min, _max);
         Decreased?.Invoke(_current);
 
-        if (_current == 0)
+        if (_current == _min)
         {
             _isOver = true;
             Over?.Invoke(_isOver);
@@ -41,10 +51,10 @@ public class Health : MonoBehaviour
         if (_isOver)
             return;
 
-        if (value < 0)
-            value = 0;
+        if (value < _min)
+            value = _min;
 
-        _current = Mathf.Clamp(_current + value, 0, _max);
+        _current = Mathf.Clamp(_current + value, _min, _max);
         Increased?.Invoke(_current);
     }
 }
