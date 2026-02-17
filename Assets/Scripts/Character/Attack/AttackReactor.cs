@@ -1,16 +1,15 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Attacker), typeof(AnimationChanger))]
+[RequireComponent(typeof(Attacker))]
 public class AttackReactor : MonoBehaviour
 {
+    [SerializeField] private AnimationChanger _animation;
+
     private Attacker _attack;
-    private AnimationChanger _animation;
 
     private void Awake()
     {
         _attack = GetComponent<Attacker>();
-        _animation = GetComponent<AnimationChanger>();
     }
 
     private void OnEnable()

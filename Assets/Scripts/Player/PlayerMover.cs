@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(AnimationChanger))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 3f;
     [SerializeField] private float _runSpeed = 5f;
     [SerializeField] private float _jumpForce = 7f;
 
+    [SerializeField] private AnimationChanger _animationChanger;
     [SerializeField] private GroundChecker _groundChecker;
 
     private Rigidbody2D _rigidbody;
-    private AnimationChanger _animationChanger;
 
     private bool _onGround;
     private bool _isRunning;
@@ -18,7 +18,6 @@ public class PlayerMover : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animationChanger = GetComponent<AnimationChanger>();
 
         _isRunning = false;
         _onGround = true;

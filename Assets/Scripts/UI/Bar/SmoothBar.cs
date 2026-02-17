@@ -18,9 +18,9 @@ public class SmoothBar : BarBase
 
     private IEnumerator UpdateBar(int value)
     {
-        while (_slider.value != value)
+        while (Slider.value != value)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, value, _speed * Time.deltaTime);
+            Slider.value = Mathf.MoveTowards(Slider.value, value, _speed * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 

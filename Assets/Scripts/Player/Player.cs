@@ -4,16 +4,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader;
+    [SerializeField] private Rotator _rotator;
 
     private PlayerMover _movement;
-    private Rotator _rotator;
     private Attacker _attacker;
     private Health _health;
 
     private void Awake()
     {
         _movement = GetComponent<PlayerMover>();
-        _rotator = GetComponent<Rotator>();
         _attacker = GetComponent<Attacker>();
         _health = GetComponent<Health>();
     }

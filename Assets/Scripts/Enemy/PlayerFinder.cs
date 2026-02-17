@@ -8,11 +8,11 @@ public class PlayerFinder : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _checkInterval = 0.3f;
 
-    public event Action<Vector3> PlayerFound;
-    public event Action PlayerLost;
-
     private WaitForSeconds _wait;
     private bool _isSearchActive;
+
+    public event Action<Vector3> PlayerFound;
+    public event Action PlayerLost;
 
     private void Awake()
     {
@@ -23,11 +23,6 @@ public class PlayerFinder : MonoBehaviour
     {
         _isSearchActive = true;
         StartCoroutine(CheckPlayer());
-    }
-
-    private void OnDisable()
-    {
-        _isSearchActive = false;
     }
 
     private IEnumerator CheckPlayer()
@@ -43,6 +38,11 @@ public class PlayerFinder : MonoBehaviour
             else
                 PlayerLost?.Invoke();
         }
+    }
+
+    private void OnDisable()
+    {
+        _isSearchActive = false;
     }
 
     private void OnDrawGizmosSelected()

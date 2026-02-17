@@ -8,10 +8,10 @@ public class GroundChecker : MonoBehaviour
     [SerializeField] private float _distance = 0.2f;
     [SerializeField] private float _checkDelayInSeconds = 0.1f;
 
-    public event Action<bool> GroundStateChanged;
-
     private bool _lastGroundState;
     private WaitForSeconds _wait;
+
+    public event Action<bool> GroundStateChanged;
 
     private void Awake()
     {

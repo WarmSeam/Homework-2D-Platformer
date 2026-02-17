@@ -18,6 +18,12 @@ public class OpponentPositionHandler : MonoBehaviour
         _playerFinder.PlayerLost += OnPlayerLost;
     }
 
+    private void OnDisable()
+    {
+        _playerFinder.PlayerFound -= OnPlayerFound;
+        _playerFinder.PlayerLost -= OnPlayerLost;
+    }
+
     private void OnPlayerFound(Vector3 target)
     {
         _mover.SpeedUp(target);

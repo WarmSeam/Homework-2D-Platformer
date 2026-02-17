@@ -1,15 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Health), typeof(AnimationChanger))]
+[RequireComponent(typeof(Health))]
 public class HealthChangingReactor : MonoBehaviour
 {
+    [SerializeField] private AnimationChanger _animationChanger;
+
     private Health _health;
-    private AnimationChanger _animationChanger;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
-        _animationChanger = GetComponent<AnimationChanger>();
     }
 
     private void OnEnable()

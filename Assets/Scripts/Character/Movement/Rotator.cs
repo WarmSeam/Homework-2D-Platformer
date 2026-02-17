@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
-    public event Action Rotated;
-
     private Quaternion _faceLeft;
     private Quaternion _faceRight;
 
@@ -29,7 +27,5 @@ public class Rotator : MonoBehaviour
         _isDirectedRight = isDirectedRight;
 
         transform.rotation = _isDirectedRight ? _faceRight : _faceLeft;
-
-        Rotated?.Invoke();
     }
 }

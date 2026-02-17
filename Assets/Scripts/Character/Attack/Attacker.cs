@@ -11,11 +11,11 @@ public class Attacker : MonoBehaviour
     [SerializeField] private PunchZone _punchZone;
     [SerializeField] private LayerMask _layerMask;
 
-    public event Action Attacking;
-
     private WaitForSeconds _waitAnimationStart;
     private WaitForSeconds _waitEndAttack;
     private IEnumerator _attackCoroutine;
+
+    public event Action Attacking;
 
     private void Awake()
     {

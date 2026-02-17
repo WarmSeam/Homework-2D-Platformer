@@ -8,15 +8,15 @@ public class DestinationSelector : MonoBehaviour
     [SerializeField] private float _playerReachDistance = 1f;
     [SerializeField] private PlayerFinder _finder;
 
-    public event Action<Vector3> WaypointChanged;
-    public event Action<bool> PlayerClose;
-
     private int _currentIndex;
     private int _waypointsCount;
 
     private Vector3 _currentTarget;
     private bool _isChasingPlayer;
     private bool _isPlayerClose;
+
+    public event Action<Vector3> WaypointChanged;
+    public event Action<bool> PlayerClose;
 
     private void Awake()
     {
@@ -25,12 +25,6 @@ public class DestinationSelector : MonoBehaviour
         
         _isChasingPlayer = false;
         _isPlayerClose = false;
-    }
-
-    private void Start()
-    {
-        if (_waypointsCount > 0)
-            WaypointChanged?.Invoke(_waypoints[0].transform.position);
     }
 
     private void OnEnable()
@@ -49,6 +43,12 @@ public class DestinationSelector : MonoBehaviour
             _finder.PlayerFound -= OnPlayerFound;
             _finder.PlayerLost -= OnPlayerLost;
         }
+    }
+
+    private void Start()
+    {
+        if (_waypointsCount > 0)
+            WaypointChanged?.Invoke(_waypoints[0].transform.position);
     }
 
     private void Update()

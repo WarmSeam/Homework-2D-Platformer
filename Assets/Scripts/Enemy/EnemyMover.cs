@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(AnimationChanger))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _patrolSpeed = 1f;
     [SerializeField] private float _chasingSpeed = 2f;
+    [SerializeField] private AnimationChanger _animationChanger;
 
     private Rigidbody2D _rigidbody;
-    private AnimationChanger _animationChanger;
 
     private Vector3 _target;
     private bool _isMoving = true;
@@ -16,7 +16,6 @@ public class EnemyMover : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animationChanger = GetComponent<AnimationChanger>();
 
         _target = transform.position;
         _currentSpeed = _patrolSpeed;

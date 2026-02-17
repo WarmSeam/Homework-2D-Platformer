@@ -4,13 +4,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public abstract class BarBase : MonoBehaviour
 {
-    [SerializeField] protected Health _health;
+    [SerializeField] protected Health Health;
 
-    protected Slider _slider;
+    protected Slider Slider;
 
     protected virtual void Awake()
     {
-        _slider = GetComponent<Slider>();
+        Slider = GetComponent<Slider>();
     }
 
     protected virtual void Start()
@@ -20,22 +20,22 @@ public abstract class BarBase : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        _health.Decreased += OnHealthChanged;
-        _health.Increased += OnHealthChanged;
+        Health.Decreased += OnHealthChanged;
+        Health.Increased += OnHealthChanged;
     }
 
     protected virtual void OnDisable()
     {
-        _health.Decreased -= OnHealthChanged;
-        _health.Increased -= OnHealthChanged;
+        Health.Decreased -= OnHealthChanged;
+        Health.Increased -= OnHealthChanged;
     }
 
     protected void SetSliderValues()
     {
-        _slider.minValue = _health.Min;
-        _slider.maxValue = _health.Max;
+        Slider.minValue = Health.Min;
+        Slider.maxValue = Health.Max;
 
-        _slider.value = _health.Current;
+        Slider.value = Health.Current;
     }
 
     private void OnHealthChanged(int value)

@@ -8,9 +8,9 @@ public abstract class SpawnPoint : MonoBehaviour
 
     public bool IsOccupied {  get; private set; }
 
-    public void SetOccupied(bool value)
+    public void SetOccupied(bool isOccupied)
     {
-        IsOccupied = value;
+        IsOccupied = isOccupied;
     }
 
     private void OnDrawGizmos()
