@@ -32,16 +32,21 @@ public abstract class BarBase : MonoBehaviour
 
     protected void SetSliderValues()
     {
-        Slider.minValue = Health.Min;
-        Slider.maxValue = Health.Max;
+        Slider.minValue = 0f;
+        Slider.maxValue = 1f;
 
         Slider.value = Health.Current;
     }
 
     private void OnHealthChanged(int value)
     {
-        UpdateView(value);
+        UpdateView(GetNormalizedValue());
     }
 
-    protected abstract void UpdateView(int value);
+    private float GetNormalizedValue()
+    {
+        return Health.Current / (float)Health.Max;
+    }
+
+    protected abstract void UpdateView(float value);
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealthAdder : MonoBehaviour
 {
-    [SerializeField] ItemCollector _itemCollector;
+    [SerializeField] private ItemCollector _itemCollector;
 
     public event Action<int> HealthAdded;
 

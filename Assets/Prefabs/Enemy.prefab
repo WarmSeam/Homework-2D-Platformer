@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 181905460078862750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.69, y: -0, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9178559857525907578}
+  m_Father: {fileID: 5915490743049190551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5317068610349087427
 MonoBehaviour:
@@ -186,7 +186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9178559857525907578}
+  m_Father: {fileID: 5915490743049190551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5552877354979549895
 MonoBehaviour:
@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 7474939226113187428}
   - component: {fileID: 6554038696449459967}
   - component: {fileID: 2837293545121259300}
+  - component: {fileID: 5625125424675636253}
   m_Layer: 8
   m_Name: View
   m_TagString: Untagged
@@ -282,7 +283,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3536803713148933828}
+  - {fileID: 6358655041869481791}
   m_Father: {fileID: 9178559857525907578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6283161140157933372
@@ -377,7 +380,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -7
   m_Sprite: {fileID: 728499341, guid: 7a84368bf36d30c43879f3f6d1ad6e59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -401,6 +404,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e416ff849d4f942b784e10dc18f39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5625125424675636253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3446078683430109609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283c442148897fe44b265f4739719ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 5924896315588753476}
+  _canvas: {fileID: 1293133684978743582}
 --- !u!1 &4038141241358853459
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: {fileID: 5924896315588753476}
-  _speed: 35
+  _duration: 0.3
 --- !u!1 &4143375533215502200
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,8 +565,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5915490743049190551}
-  - {fileID: 3536803713148933828}
-  - {fileID: 6358655041869481791}
   - {fileID: 394252461126836812}
   - {fileID: 5728104014900214380}
   - {fileID: 6260973599184333095}

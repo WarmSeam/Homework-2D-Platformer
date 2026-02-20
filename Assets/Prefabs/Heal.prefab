@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2f737385d71e34c82283e44cf3b83c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healValue: 30
 --- !u!70 &6132194411513949158
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +137,7 @@ CapsuleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: -8
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
